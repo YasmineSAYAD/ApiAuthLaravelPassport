@@ -28,7 +28,8 @@ class PassportAuthController extends Controller
     ];
     //insert the user
     User::insert($userToInsert);
-   
+    //find the user with the provider email
+    $user = User::where('email', $request->email)->first();
      //return response
     $token = $user->createToken('Laravel Password Grant Client')->accessToken;
     $response = ['id'=>$user->id,'token' => $token];
